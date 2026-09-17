@@ -1,0 +1,143 @@
+<!DOCTYPE html>                                                                 
+<html lang="es">                                                                
+<head>                                                                          
+<meta charset="UTF-8">                                                          
+<meta name="viewport" content="width=device-width, initial-scale=1.0">          
+<title>Cora Z7 - Efectos de Audio</title>                                       
+                                                                                
+<style>                                                                         
+body {                                                                          
+    font-family: Arial, sans-serif;                                             
+    background: #181818;                                                        
+    color: white;                                                               
+    text-align: center;                                                         
+    margin: 0;                                                                  
+    padding: 40px 20px;                                                         
+}                                                                               
+                                                                                
+h1 {                                                                            
+    font-size: 36px;                                                            
+    margin-bottom: 5px;                                                         
+}                                                                               
+                                                                                
+h2 {                                                                            
+    font-weight: normal;                                                        
+    color: #aaa;                                                                
+    margin-bottom: 40px;                                                        
+}                                                                               
+                                                                                
+.efectos {                                                                      
+    display: grid;                                                              
+    grid-template-columns: repeat(2, 220px);                                    
+    gap: 20px;                                                                  
+    justify-content: center;                                                    
+}                                                                               
+                                                                                
+button {                                                                        
+    width: 220px;                                                               
+    height: 80px;                                                               
+    border: none;                                                               
+    border-radius: 12px;                                                        
+    font-size: 20px;                                                            
+    font-weight: bold;                                                          
+    cursor: pointer;                                                            
+    transition: 0.15s;                                                          
+}                                                                               
+                                                                                
+button:hover {                                                                  
+    transform: scale(1.05);                                                     
+}                                                                               
+                                                                                
+.limpio {                                                                       
+    background: white;                                                          
+    color: black;                                                               
+}                                                                               
+                                                                                
+.tremolo {                                                                      
+    background: #003b8f;                                                        
+    color: white;                                                               
+}                                                                               
+                                                                                
+.reverb {                                                                       
+    background: magenta;                                                        
+    color: white;                                                               
+}                                                                               
+                                                                                
+.chorus {                                                                       
+    background: #ffd900;                                                        
+    color: black;                                                               
+}                                                                               
+                                                                                
+.delay {                                                                        
+    background: #d71920;                                                        
+    color: white;                                                               
+}                                                                               
+                                                                                
+.flanger {                                                                      
+    background: #00a651;                                                        
+    color: white;                                                               
+}                                                                               
+                                                                                
+#estado {                                                                       
+    margin-top: 35px;                                                           
+    font-size: 22px;                                                            
+    color: #ccc;                                                                
+}                                                                               
+</style>                                                                        
+</head>                                                                         
+                                                                                
+<body>                                                                          
+                                                                                
+<h1>Cora Z7</h1>                                                                
+<h2>Procesador de efectos de audio</h2>                                         
+                                                                                
+<div class="efectos">                                                           
+                                                                                
+<button class="limpio" onclick="cambiarEfecto(0,'Sin efecto')">                 
+Sin efecto                                                                      
+</button>                                                                       
+                                                                                
+<button class="tremolo" onclick="cambiarEfecto(1,'Tremolo')">                   
+Tremolo                                                                         
+</button>                                                                       
+                                                                                
+<button class="reverb" onclick="cambiarEfecto(2,'Reverb')">                     
+Reverb                                                                          
+</button>                                                                       
+                                                                                
+<button class="chorus" onclick="cambiarEfecto(3,'Chorus')">                     
+Chorus                                                                          
+</button>                                                                       
+                                                                                
+<button class="delay" onclick="cambiarEfecto(4,'Delay')">                       
+Delay                                                                           
+</button>                                                                       
+                                                                                
+<button class="flanger" onclick="cambiarEfecto(5,'Flanger')">                   
+Flanger                                                                         
+</button>                                                                       
+                                                                                
+</div>                                                                          
+                                                                                
+<div id="estado">                                                               
+Efecto actual: Sin efecto                                                       
+</div>                                                                          
+                                                                                
+<script>                                                                        
+function cambiarEfecto(numero, nombre)                                          
+{                                                                               
+    fetch("/cgi-bin/efecto.cgi?efecto=" + numero)                               
+    .then(response => response.text())                                          
+    .then(data => {                                                             
+        document.getElementById("estado").innerHTML =                           
+            "Efecto actual: <b>" + nombre + "</b>";                             
+    })                                                                          
+    .catch(error => {                                                           
+        document.getElementById("estado").innerHTML =                           
+            "Error comunicando con la Cora Z7";                                 
+    });                                                                         
+}                                                                               
+</script>                                                                       
+                                                                                
+</body>                                                                         
+</html>
